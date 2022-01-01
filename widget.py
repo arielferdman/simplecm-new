@@ -24,6 +24,7 @@ class Layouts(Enum):
 class Main(QMainWindow):
     def __init__(self, parent=None):
         super(Main, self).__init__()
+        self.get_base_path()
         self.get_ui_loader()
         self.get_column_names()
         self.get_base_dir()
@@ -68,7 +69,7 @@ class Main(QMainWindow):
         ]
 
     def load_ui(self):
-        self.get_screen_file_path(Layouts.CLIENT_LIST)
+        self.get_screen_file_path(Layouts.CREATE_CLIENT)
         self.load_screen_ui_file()
         self.close_screen_ui_file()
         self.get_columns_properties()
@@ -108,10 +109,10 @@ class Main(QMainWindow):
         self.get_root_dir_file_path(layout)
 
     def get_root_dir_file_path(self, filename):
-        self.path = os.path.join(self.get_base_path(), filename.value)
+        self.path = os.path.join(self.base_path, filename.value)
 
     def get_base_path(self):
-        os.fspath(Path(__file__).resolve().parent)
+        self.base_path = os.fspath(Path(__file__).resolve().parent)
 
     def add_icon_to_button(self):
         self.documents_button.setIcon(QtGui.QIcon('file-line.svg'))
