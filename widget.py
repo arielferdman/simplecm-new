@@ -10,19 +10,29 @@ from PySide6.QtWidgets import QApplication, QFileDialog, QMainWindow
 from PySide6.QtCore import QFile
 from PySide6.QtUiTools import QUiLoader
 
+from enum import Enum
+
 import sqlite3
 
 from pprint import pprint
+
+class Layouts(Enum):
+    CREATE_CLIENT = 'form.ui'
+    CLIENT_LIST = 'client_list.ui'
 
 
 class Main(QMainWindow):
     def __init__(self, parent=None):
         super(Main, self).__init__()
+        self.get_ui_loader()
         self.get_column_names()
         self.get_base_dir()
         self.get_documents_dir()
         self.init_new_filepaths_property()
         self.load_ui()
+
+    def get_ui_loader(self):
+        self.loader = QUiLoader()
 
     def create_client_document_folder(self):
         self.create_client_documents_folder_name()
@@ -58,10 +68,9 @@ class Main(QMainWindow):
         ]
 
     def load_ui(self):
-        loader = QUiLoader()
-        path = self.get_main_screen_file_path()
-        ui_file = self.load_main_screen_file(loader, path)
-        self.close_main_screen_file(ui_file)
+        self.get_screen_file_path(Layouts.CLIENT_LIST)
+        self.load_screen_ui_file()
+        self.close_screen_ui_file()
         self.get_columns_properties()
         self.create_additional_widgets()
         
@@ -71,12 +80,17 @@ class Main(QMainWindow):
 
         self.add_icon_to_button()
 
+    def load_screen(self, layout):
+        self.get_screen_file_path(layout)
+        self.load_screen_ui_file()
+        self.close_screen_ui_file()
+
     def get_columns_properties(self):
         for column_name in self.columns:
             setattr(self, column_name, getattr(self.ui, column_name))
 
-    def close_main_screen_file(self, ui_file):
-        ui_file.close()
+    def close_screen_ui_file(self):
+        self.ui_file.close()
 
     def create_additional_widgets(self):
         self.create_client_button = self.ui.create_client_button
@@ -85,14 +99,19 @@ class Main(QMainWindow):
         self.documents_button.clicked.connect(self.select_documents)
         self.documents.hide()
 
-    def load_main_screen_file(self, loader, path):
-        ui_file = QFile(path)
-        ui_file.open(QFile.ReadOnly)
-        self.ui = loader.load(ui_file, self)
-        return ui_file
+    def load_screen_ui_file(self):
+        self.ui_file = QFile(self.path)
+        self.ui_file.open(QFile.ReadOnly)
+        self.ui = self.loader.load(self.ui_file, self)
 
-    def get_main_screen_file_path(self):
-        return os.fspath(Path(__file__).resolve().parent / "form.ui")
+    def get_screen_file_path(self, layout):
+        self.get_root_dir_file_path(layout)
+
+    def get_root_dir_file_path(self, filename):
+        self.path = os.path.join(self.get_base_path(), filename.value)
+
+    def get_base_path(self):
+        os.fspath(Path(__file__).resolve().parent)
 
     def add_icon_to_button(self):
         self.documents_button.setIcon(QtGui.QIcon('file-line.svg'))
@@ -136,6 +155,13 @@ class Main(QMainWindow):
         self.create_client_document_folder()
         self.move_client_documents()
         self.close_sqlite_connection()
+        self.switch_layout(Layouts.CLIENT_LIST)
+
+    def switch_layout(self, layout):
+        self.load_screen(layout)
+        if layout == Layouts.CREATE_CLIENT:
+            self.get_columns_properties()
+            self.create_additional_widgets()
 
     def save_client_to_db(self):
         self.create_query()
