@@ -1,10 +1,10 @@
-from QMyBaseWindow import QMyBaseWindow
 from MyEnums import Layouts
+from QMyBaseWindow import QMyBaseWindow
 
 
-class ClientList(QMyBaseWindow):
+class QMyClientList(QMyBaseWindow):
     def __init__(self, parent=None):
-        super(ClientList, self).__init__()
+        super(QMyClientList, self).__init__()
         self.load_ui()
 
     def init_layout(self):

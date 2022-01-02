@@ -1,9 +1,11 @@
 import json
 import os
 import sqlite3
+
 from PySide6.QtCore import QFile
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtWidgets import QMainWindow
+
 from MyEnums import DataFileNames, FileOperations, Names
 
 
@@ -82,7 +84,7 @@ class QMyBaseWindow(QMainWindow):
         self.get_root_dir_file_path(layout)
 
     def get_root_dir_file_path(self, filename):
-        self.path = os.path.join(self.base_path, filename.value)
+        self.path = os.path.join(self.base_path, filename)
 
     def get_filename(self, file_path):
         return os.path.split(file_path)[1]

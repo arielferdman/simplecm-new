@@ -7,8 +7,8 @@ import sys
 from PySide6 import QtCore, QtGui
 from PySide6.QtWidgets import QFileDialog
 
-from MyEnums import (DataFileNames, DirNames, Layouts, Names,
-                     SqlParts, StringParts)
+from MyEnums import (DataFileNames, DirNames, Layouts, Names, SqlParts,
+                     StringParts)
 from QMyBaseWindow import QMyBaseWindow
 
 
