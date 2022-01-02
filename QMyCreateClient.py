@@ -1,8 +1,6 @@
 import json
 import os
 import shutil
-import sqlite3
-import sys
 
 from PySide6 import QtCore, QtGui
 from PySide6.QtWidgets import QFileDialog
@@ -18,6 +16,24 @@ class QMyCreateClient(QMyBaseWindow):
         self.init_properties()
         self.load_ui()
 
+    def load_ui(self):
+        self.get_columns_properties()
+        self.create_additional_widgets()
+        self.fill_in_form()
+        self.add_icon_to_button()
+
+    def init_properties(self):
+        self.init_filesystem_props()
+
+    def init_filesystem_props(self):
+        self.init_base_path()
+        self.init_documents_dir()
+        self.init_new_filepaths_property()
+        self.init_data_files_paths()
+
+    def init_data_files_paths(self):
+        self.init_initial_form_data_file_path()
+
     def init_layout(self):
         self.layout = Layouts.CREATE_CLIENT.value
 
@@ -28,6 +44,9 @@ class QMyCreateClient(QMyBaseWindow):
     def create_client_document_folder(self):
         self.create_client_documents_folder_name()
         self.create_client_document_folder_path()
+        self.move_client_files()
+
+    def move_client_files(self):
         if not os.path.exists(self.client_documents_folder_path):
             os.mkdir(self.client_documents_folder_path)
 
@@ -75,9 +94,6 @@ class QMyCreateClient(QMyBaseWindow):
     def update_documents(self):
         self.documents.setText(json.dumps(self.full_moved_file_paths))
 
-    def get_documents_filenames(self):
-        return [self.get_filename(file_path) for file_path in self.documents_paths]
-
     def move_files(self):
         for file_path in self.documents_paths:
             full_new_file_path = os.path.join(
@@ -91,13 +107,6 @@ class QMyCreateClient(QMyBaseWindow):
         self.move_client_documents()
         self.save_client_to_db()
         self.close_sqlite_connection()
-        self.switch_layout(Layouts.CLIENT_LIST)
-
-    def switch_layout(self, layout):
-        self.load_screen(layout)
-        if layout == Layouts.CREATE_CLIENT:
-            self.get_columns_properties()
-            self.create_additional_widgets()
 
     def save_client_to_db(self):
         self.create_query()

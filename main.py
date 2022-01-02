@@ -16,6 +16,7 @@ def start_main_program():
         stack_widget.show()
         sys.exit(app.exec())
 
+
 def init_widgets(stack_widget):
     for WidgetClass in [QMyCreateClient, QMyClientList]:
         widget = WidgetClass()
