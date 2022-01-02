@@ -23,6 +23,7 @@ class QMyCreateClient(QMyBaseWindow):
         self.add_icon_to_button()
 
     def init_properties(self):
+        super(QMyCreateClient, self).init_properties()
         self.init_filesystem_props()
 
     def init_filesystem_props(self):
