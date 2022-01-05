@@ -4,12 +4,12 @@ import sqlite3
 
 from PySide6.QtCore import QFile
 from PySide6.QtUiTools import QUiLoader
-from PySide6.QtWidgets import QMainWindow
+from PySide6.QtWidgets import QMainWindow, QWidget
 
 from MyEnums import DataFileNames, FileOperations, Names
 
 
-class QMyBaseWindow(QMainWindow):
+class QMyBaseWindow(QWidget):
     def __init__(self, parent=None):
         super(QMyBaseWindow, self).__init__()
         self.init_properties()

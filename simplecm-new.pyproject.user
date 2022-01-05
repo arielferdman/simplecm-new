@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 6.0.1, 2022-01-02T10:13:52. -->
+<!-- Written by QtCreator 6.0.1, 2022-01-05T20:43:39. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -116,16 +116,12 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">/home/ariel/manna/simplecm-new/widget.py</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration./home/ariel/manna/simplecm-new/widget.py</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/ariel/manna/simplecm-new/widget.py</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{c24278ce-b7a7-4ba9-88dd-c2f18d05ddcd}</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Script">/home/ariel/manna/simplecm-new/widget.py</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.CustomExecutableRunConfiguration</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey"></value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/ariel/manna/simplecm-new</value>
    </valuemap>
    <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>

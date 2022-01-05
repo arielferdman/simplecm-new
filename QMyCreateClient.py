@@ -17,6 +17,7 @@ class QMyCreateClient(QMyBaseWindow):
         self.load_ui()
 
     def load_ui(self):
+        super(QMyCreateClient, self).load_ui()
         self.get_columns_properties()
         self.create_additional_widgets()
         self.fill_in_form()
@@ -27,15 +28,18 @@ class QMyCreateClient(QMyBaseWindow):
         self.init_filesystem_props()
 
     def init_filesystem_props(self):
+        super(QMyCreateClient, self).init_filesystem_props()
         self.init_base_path()
         self.init_documents_dir()
         self.init_new_filepaths_property()
         self.init_data_files_paths()
 
     def init_data_files_paths(self):
+        super(QMyCreateClient, self).init_data_files_paths()
         self.init_initial_form_data_file_path()
 
     def init_layout(self):
+        super(QMyCreateClient, self).init_layout()
         self.layout = Layouts.CREATE_CLIENT.value
 
     def init_initial_form_data_file_path(self):
